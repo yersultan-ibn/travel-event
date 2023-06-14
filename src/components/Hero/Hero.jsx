@@ -121,7 +121,7 @@ function Hero() {
             state: { flights: flights },
           }}
         >
-          Увидеть все рейсы
+          Показать все рейсы
         </Link>
       </div>
     </div>
