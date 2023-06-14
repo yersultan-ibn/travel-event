@@ -10,19 +10,21 @@ function Hero() {
   const [origin, setOrigin] = useState("Откуда");
   const [destination, setDestination] = useState("Куда");
   const [flights, setFlights] = useState([]);
-  const history = useHistory();
   const [allFlights, setAllFlights] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/fly.json")
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/fly.json");
         setFlights(response.data.flights);
         setAllFlights(response.data.flights);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log("Ошибка при загрузке данных:", error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleSearch = () => {
@@ -70,6 +72,8 @@ function Hero() {
     }),
   };
 
+  const isSearchDisabled = !origin || !destination;
+
   return (
     <div className="hero">
       <video autoPlay loop muted id="video">
@@ -104,7 +108,7 @@ function Hero() {
               type="button"
               className="btn"
               onClick={handleSearch}
-              disabled={!origin || !destination}
+              disabled={isSearchDisabled}
             >
               <AiOutlineSearch className="icon" />
               Найти билеты

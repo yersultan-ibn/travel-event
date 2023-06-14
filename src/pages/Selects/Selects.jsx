@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./SelectsStyles.css";
 import Select from "react-select";
-import CheckboxGroup, { Checkbox } from "react-checkbox-group";
+import CheckboxGroup from "react-checkbox-group";
 import SelectsImg from "../../components/SelectsImg/SelectsImg";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
