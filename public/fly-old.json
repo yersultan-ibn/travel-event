@@ -1,0 +1,45 @@
+{
+  "flights": [
+    {
+      "id": 1,
+      "origin": "Moscow",
+      "destination": "New York", 
+      "price": 500,
+      "stops": 3,
+      "layovers": [
+        {
+          "airport": "Frankfurt",
+          "duration": "2h",
+          "flightTime": "5h"
+        },
+        {
+          "airport": "Chicago",
+          "duration": "3h",
+          "flightTime": "8h"
+        },
+        {
+          "airport": "Atlanta",
+          "duration": "1h",
+          "flightTime": "3h"
+        }
+      ],
+      "totalFlightTime": "16h"
+    },
+    {
+      "id": 2,
+      "origin": "London",
+      "destination": "Paris",
+      "price": 200,
+      "stops": 1,
+      "layovers": [
+        {
+          "airport": "Amsterdam",
+          "duration": "1h",
+          "flightTime": "2h"
+        }
+      ],
+      "totalFlightTime": "4h"
+    }
+    
+  ]
+}
