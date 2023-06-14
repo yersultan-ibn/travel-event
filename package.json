@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@react-icons/all-files": "^4.1.0",
     "axios": "^1.4.0",
     "react": "^17.0.2",
     "react-checkbox-group": "^5.0.2",
@@ -13,7 +12,6 @@
     "react-scripts": "5.0.0",
     "react-scroll": "^1.8.4",
     "react-select": "^5.7.3",
-    "react-slider": "^2.0.5",
     "react-transition-group": "^4.4.5",
     "web-vitals": "^2.1.4"
   },

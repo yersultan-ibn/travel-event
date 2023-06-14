@@ -1,26 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "./SelectsStyles.css";
 import Select from "react-select";
-import CheckboxGroup from "react-checkbox-group";
+import CheckboxGroup, { Checkbox } from "react-checkbox-group";
 import SelectsImg from "../../components/SelectsImg/SelectsImg";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 function Selects() {
+  // State variables
   const [flights, setFlights] = useState([]);
   const [sortedFlights, setSortedFlights] = useState([]);
   const [sortOption, setSortOption] = useState("cheap");
   const [selectedStops, setSelectedStops] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [flightsPerPage] = useState(6);
+
   const location = useLocation();
 
+  // Fetch flights data
   useEffect(() => {
     axios.get("http://localhost:3000/fly.json").then(({ data }) => {
       setFlights(data.flights);
     });
   }, []);
 
+  // Update sorted flights based on filters and sorting option
   useEffect(() => {
     const filteredFlights = location.state?.flights || [];
 
@@ -40,26 +44,30 @@ function Selects() {
     }
   }, [location.state?.flights, sortOption, selectedStops]);
 
+  // Sorting options
   const sortOptions = [
     { value: "cheap", label: "Сначала дешевые" },
     { value: "expensive", label: "Сначала дорогие" },
   ];
 
+  // Currently selected sort option
   const selectedSortOption = sortOptions.find(
     (option) => option.value === sortOption
   );
 
+  // Event handler for sort option change
   const handleSortChange = (selectedOption) => {
     setSortOption(selectedOption ? selectedOption.value : "cheap");
   };
 
+  // Event handler for stop selection change
   const handleStopChange = (selectedStops) => {
     setSelectedStops(selectedStops);
   };
 
+  // Pagination
   const indexOfLastFlight = currentPage * flightsPerPage;
   const indexOfFirstFlight = indexOfLastFlight - flightsPerPage;
-
   const currentFlights = sortedFlights.slice(
     indexOfFirstFlight,
     indexOfLastFlight
@@ -69,6 +77,7 @@ function Selects() {
     setCurrentPage(pageNumber);
   };
 
+  // Generate page numbers for pagination
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(sortedFlights.length / flightsPerPage); i++) {
     pageNumbers.push(i);
@@ -126,10 +135,10 @@ function Selects() {
           />
         </div>
         <div className="selects-cards-container">
-          {currentFlights.map((fl) => (
-            <div className="card" key={fl.id}>
+          {currentFlights.map((flight) => (
+            <div className="card" key={flight.id}>
               <div className="card-wrapper">
-                <SelectsImg key={fl.id} {...fl} />
+                <SelectsImg key={flight.id} {...flight} />
               </div>
             </div>
           ))}
