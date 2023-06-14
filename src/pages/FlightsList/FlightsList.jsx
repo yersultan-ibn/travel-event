@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./SelectsStyles.css";
+import "./FlightsList.css";
 import Select from "react-select";
 import CheckboxGroup from "react-checkbox-group";
-import SelectsImg from "../../components/SelectsImg/SelectsImg";
+import SelectsImg from "../../components/FlightsItem/FlightsItem";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-function Selects() {
+function FlightsList() {
   // State variables
   const [flights, setFlights] = useState([]);
   const [sortedFlights, setSortedFlights] = useState([]);
@@ -159,4 +159,4 @@ function Selects() {
   );
 }
 
-export default Selects;
+export default FlightsList;

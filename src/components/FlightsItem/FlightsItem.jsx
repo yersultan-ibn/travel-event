@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import "./SelectsImgStyles.css";
-import { IoAirplane } from "react-icons/io5";
+import "./FlightsItem.css";
 import Modal from "../Modal/Modal";
-import Info from "../FlightDetails/FlightDetails";
 import airplane from "../../assets/air.svg";
 
-function SelectsImg({
+function FlightsItem({
   id,
   origin,
   destination,
@@ -91,4 +89,4 @@ function SelectsImg({
   );
 }
 
-export default SelectsImg;
+export default FlightsItem;
