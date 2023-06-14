@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./SelectsImgStyles.css";
 import { IoAirplane } from "react-icons/io5";
 import Modal from "../Modal/Modal";
@@ -14,7 +14,15 @@ function SelectsImg({
   totalFlightTime,
   layovers,
 }) {
-  const [show, setShow] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleModalOpen = () => {
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
 
   return (
     <>
@@ -25,44 +33,41 @@ function SelectsImg({
         <h3>
           {origin} - {destination}
         </h3>
-        <button onClick={() => setShow(true)} className="btn-detail">
+        <button onClick={handleModalOpen} className="btn-detail">
           Детали перелёта
         </button>
         <Modal
           title="Детали перелёта"
-          onClose={() => setShow(false)}
-          show={show}
+          onClose={handleModalClose}
+          show={showModal}
         >
           <h3>
             {origin} - {destination}
           </h3>
-          {/* // <Info origin={origin} totalFlightTime={totalFlightTime} {...l} /> */}
-          {layovers.map((l, i) => (
-            <div className="modal-body-item">
+          {layovers.map((layover, index) => (
+            <div className="modal-body-item" key={index}>
               <div className="v8aa">
                 <span className="aav9 aa9v"></span>
                 <span className="a9va aa9v"></span>
                 <span className="aav9 aa9v1"></span>
               </div>
               <div>
-                {i === 0 && (
+                {index === 0 ? (
                   <>
                     <h3>{origin}</h3>
-                    <p>Время полета: {l.flightTime}</p>
+                    <p>Время полета: {layover.flightTime}</p>
                   </>
-                )}
-                {i > 0 && (
+                ) : (
                   <>
-                    <h3>{layovers[i - 1].airport}</h3>
-                    <p>Время полета: {layovers[i - 1].flightTime}</p>
+                    <h3>{layovers[index - 1].airport}</h3>
+                    <p>Время полета: {layovers[index - 1].flightTime}</p>
                   </>
                 )}
-                <h3>{l.airport}</h3>
-                <p>Ожидание: {l.duration}</p>
+                <h3>{layover.airport}</h3>
+                <p>Ожидание: {layover.duration}</p>
               </div>
             </div>
           ))}
-
           <h3 className="time-air">Общее время полета {totalFlightTime}</h3>
         </Modal>
       </div>
